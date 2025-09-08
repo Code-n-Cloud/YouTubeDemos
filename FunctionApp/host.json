@@ -1,0 +1,19 @@
+{
+  "version": "2.0",
+  "extensions": {
+    "mcp": {
+      "instructions": "This serer is used to copy and paste code snippet.",
+      "serverName": "YoutubeDemoServer",
+      "serverVersion": "2.0.0"
+    }
+  },
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      },
+      "enableLiveMetricsFilters": true
+    }
+  }
+}
