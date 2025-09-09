@@ -7,3 +7,6 @@
 /ClassLibrary/obj
 /ConsoleApp/bin/Debug/net9.0
 /ConsoleApp/obj
+/StreamableHttpWebApp/bin
+/StreamableHttpWebApp/obj
+/ClassLibrary/bin/Release/net9.0
