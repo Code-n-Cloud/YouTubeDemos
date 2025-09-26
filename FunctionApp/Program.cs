@@ -1,8 +1,5 @@
-using ClassLibrary.Services;
-using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = FunctionsApplication.CreateBuilder(args);
@@ -10,11 +7,23 @@ var builder = FunctionsApplication.CreateBuilder(args);
 builder.ConfigureFunctionsWebApplication();
 builder.Configuration.AddUserSecrets<Program>();
 
-builder.EnableMcpToolMetadata();
+//builder.Services
+//    .AddApplicationInsightsTelemetryWorkerService()
+//    .ConfigureFunctionsApplicationInsights();
+//builder.Services.AddSingleton<CustomerSupportService>();
+//builder.Services.AddSingleton<StorageAccountService>();
 
-builder.Services
-    .AddApplicationInsightsTelemetryWorkerService()
-    .ConfigureFunctionsApplicationInsights();
-builder.Services.AddSingleton<CustomerSupportService>();
+//builder.Services.AddAzureClients(azureBuilder =>
+//{
+//    var configuration = builder.Configuration;
+//    var connectionString = configuration["AzureWebJobsStorage"];
+//    azureBuilder.AddTableServiceClient(connectionString);
+//});
 
+//builder.Services.AddSingleton(provider =>
+//{
+//    var serviceClient = provider.GetRequiredService<TableServiceClient>();
+//    var tableClient = serviceClient.GetTableClient("CustomerHistory");
+//    return tableClient;
+//});
 builder.Build().Run();
