@@ -9,6 +9,7 @@ namespace StreamableHttpWebApp
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddMcpServer().WithHttpTransport().WithTools<AzureSearchTools>();
+            builder.Services.AddMcpServer().WithHttpTransport().WithTools<UtilityTools>();
             builder.Services.AddSingleton<DocumentService>();
             //builder.Services.AddMcpServer().WithHttpTransport().WithTools<WeatherAlertsTool>();
             //builder.Services.AddHttpClient("WeatherApi", client =>
@@ -18,6 +19,7 @@ namespace StreamableHttpWebApp
             //    });
             var app = builder.Build();
             app.MapMcp();
+            app.MapGet("/health", () => "Streamable HTTP Web App is running. Use /mcp to access the MCP tools.");
             app.Run();
         }
     }
