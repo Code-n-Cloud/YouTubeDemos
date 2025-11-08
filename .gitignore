@@ -10,3 +10,5 @@
 /StreamableHttpWebApp/bin
 /StreamableHttpWebApp/obj
 /ClassLibrary/bin/Release/net9.0
+/WebApplication1/bin/Debug/net9.0
+/WebApplication1/obj
