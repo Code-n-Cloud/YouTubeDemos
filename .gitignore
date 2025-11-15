@@ -12,3 +12,5 @@
 /ClassLibrary/bin/Release/net9.0
 /WebApplication1/bin/Debug/net9.0
 /WebApplication1/obj
+/StreamableHttpWebApp/StreamableHttpWebApp.csproj.user
+/WebApplication1/WebApplication1.csproj.user
