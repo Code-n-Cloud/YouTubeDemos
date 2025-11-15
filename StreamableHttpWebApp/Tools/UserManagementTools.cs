@@ -1,4 +1,5 @@
-﻿using ClassLibrary.Services;
+﻿using ClassLibrary.Entities;
+using ClassLibrary.Services;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 
@@ -24,6 +25,19 @@ namespace StreamableHttpWebApp.Tools
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error creating new user account for");
+                throw;
+            }
+        }
+        [McpServerTool, Description("Gets a list of all users")]
+        public async Task<List<UserAccountEntity>> GetAllUsers()
+        {
+            try
+            {
+                return await userManagementService.GetAllUsers();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error in getting users list");
                 throw;
             }
         }

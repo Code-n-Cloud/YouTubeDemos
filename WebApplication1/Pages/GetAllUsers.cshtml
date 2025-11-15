@@ -1,0 +1,34 @@
+﻿@page
+@model WebApplication1.Pages.GetAllUsersModel
+@{
+<h2>Users List</h2>
+
+@if (Model.Users?.Any() == true)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Users[0].FullName)</th>
+                <th>@Html.DisplayNameFor(model => model.Users[0].EmailAddress)</th>
+                <th>@Html.DisplayNameFor(model => model.Users[0].PhoneNumber)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => user.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => user.EmailAddress)</td>
+                    <td>@Html.DisplayFor(modelItem => user.PhoneNumber)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        No users found.
+    </div>
+}
+}

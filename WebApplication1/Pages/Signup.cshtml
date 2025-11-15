@@ -2,6 +2,8 @@
 @model WebApplication1.Pages.SignupModel
 <h2>Create New User Account</h2>
 
+<label>@TempData["SuccessMessage"]</label>
+
 <form method="post">
     <div class="mb-3">
         <label asp-for="UserInput.FullName" class="form-label"></label>

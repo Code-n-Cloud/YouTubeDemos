@@ -12,7 +12,7 @@ namespace ClassLibrary.Agents
             string foundryEndpoint = configuration["AZURE_FOUNDRY_ENDPOINT"];
             persistentAgentsClient = new PersistentAgentsClient(foundryEndpoint, new Azure.Identity.DefaultAzureCredential());
         }
-        public async Task<string> CreateUserAccount(CreateNewUserAccountModel createNewUserAccountModel)
+        public async Task<string> CreateUserAccount(UserAccountModel createNewUserAccountModel)
         {
             string prompt = $"""
                 Create a new user account with the following details:
@@ -21,6 +21,12 @@ namespace ClassLibrary.Agents
                 Phone Number: {createNewUserAccountModel.PhoneNumber}
                 Password: {createNewUserAccountModel.Password}
                 """;
+            string agentResponse = await CallUserManagementService(prompt);
+            return agentResponse;
+        }
+        public async Task<string> GetAllUsers()
+        {
+            string prompt = "Please give me a list of all users and make sure you return me raw json. Please don't add any extra text or formatting. I have to parse the returned json.";
             string agentResponse = await CallUserManagementService(prompt);
             return agentResponse;
         }

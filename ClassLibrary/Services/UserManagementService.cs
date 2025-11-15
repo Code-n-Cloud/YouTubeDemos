@@ -26,5 +26,14 @@ namespace ClassLibrary.Services
             await tableClient.AddEntityAsync(newUserAccount);
             return userId;
         }
+        public async Task<List<UserAccountEntity>> GetAllUsers()
+        {
+            var users = new List<UserAccountEntity>();
+            await foreach (var user in tableClient.QueryAsync<UserAccountEntity>())
+            {
+                users.Add(user);
+            }
+            return users;
+        }
     }
 }
