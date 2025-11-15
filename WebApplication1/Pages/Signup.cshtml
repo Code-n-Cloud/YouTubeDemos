@@ -1,0 +1,35 @@
+﻿@page
+@model WebApplication1.Pages.SignupModel
+<h2>Create New User Account</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="UserInput.FullName" class="form-label"></label>
+        <input asp-for="UserInput.FullName" class="form-control" />
+        <span asp-validation-for="UserInput.FullName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="UserInput.EmailAddress" class="form-label"></label>
+        <input asp-for="UserInput.EmailAddress" class="form-control" type="email" />
+        <span asp-validation-for="UserInput.EmailAddress" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="UserInput.PhoneNumber" class="form-label"></label>
+        <input asp-for="UserInput.PhoneNumber" class="form-control" type="tel" />
+        <span asp-validation-for="UserInput.PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="UserInput.Password" class="form-label"></label>
+        <input asp-for="UserInput.Password" class="form-control" type="password" />
+        <span asp-validation-for="UserInput.Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create User Account</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
