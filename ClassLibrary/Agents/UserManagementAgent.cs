@@ -30,6 +30,12 @@ namespace ClassLibrary.Agents
             string agentResponse = await CallUserManagementService(prompt);
             return agentResponse;
         }
+        public async Task<string> GetUser(string emailAddress, string password)
+        {
+            string prompt = $"Please give me a single user based on the email {emailAddress} and password {password} and make sure you return me raw json. If no user found please return me an empty string. Please don't add any extra text or formatting. I have to parse the returned json.";
+            string agentResponse = await CallUserManagementService(prompt);
+            return agentResponse;
+        }
         private async Task<string> CallUserManagementService(string prompt)
         {
             string agentId = "asst_ZdmMAV9G6wCQiHte4KGbDtlx";

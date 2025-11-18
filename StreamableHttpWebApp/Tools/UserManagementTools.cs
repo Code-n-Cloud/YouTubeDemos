@@ -41,5 +41,19 @@ namespace StreamableHttpWebApp.Tools
                 throw;
             }
         }
+        [McpServerTool, Description("Gets a signle user, or perform user sign in")]
+        public async Task<UserAccountEntity> GetUser(
+            [Description("Email address of the user, required field")] string emailAddress, [Description("Password of the user, required field")] string password)
+        {
+            try
+            {
+                return await userManagementService.GetUser(emailAddress, password);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error in getting user");
+                throw;
+            }
+        }
     }
 }

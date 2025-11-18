@@ -35,5 +35,14 @@ namespace ClassLibrary.Services
             }
             return users;
         }
+        public async Task<UserAccountEntity> GetUser(string emailAddress, string password)
+        {
+            var encodesPassword = Convert.ToBase64String(Encoding.UTF8.GetBytes(password));
+            await foreach (var user in tableClient.QueryAsync<UserAccountEntity>(filter: entity => entity.EmailAddress == emailAddress && entity.Password == encodesPassword))
+            {
+                return user;
+            }
+            return null;
+        }
     }
 }
