@@ -4,7 +4,7 @@ using System.Text.Json.Nodes;
 
 namespace ClassLibrary.Services
 {
-    public class StorageAccountService(TableClient tableClient)
+    public class StorageAccountTableService(TableClient tableClient)
     {
         public async Task<JsonObject> GetCustomerHistoryEntity(string partitionKey, string rowKey)
         {

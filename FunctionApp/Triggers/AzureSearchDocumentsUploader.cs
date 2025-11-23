@@ -9,8 +9,8 @@ public class AzureSearchDocumentsUploader
 {
     private readonly ILogger<AzureSearchDocumentsUploader> _logger;
 
-    private readonly DocumentService _documentService;
-    public AzureSearchDocumentsUploader(ILogger<AzureSearchDocumentsUploader> logger, DocumentService documentService)
+    private readonly StorageAccountBlobService _documentService;
+    public AzureSearchDocumentsUploader(ILogger<AzureSearchDocumentsUploader> logger, StorageAccountBlobService documentService)
     {
         _logger = logger;
         _documentService = documentService;

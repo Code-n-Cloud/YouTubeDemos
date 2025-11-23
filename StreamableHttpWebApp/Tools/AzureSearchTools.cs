@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace StreamableHttpWebApp.Tools
 {
-    public class AzureSearchTools(DocumentService documentService)
+    public class AzureSearchTools(StorageAccountBlobService documentService)
     {
         [McpServerTool, Description("This tool performs vector search queries against Azure Search, enabling semantic content retrieval using Azure's Open API with optional OData filtering to limit results (e.g., by status or specific tags) and custom sorting to order the results by specified fields in ascending or descending order.")]
         public async Task<IEnumerable<SearchResult<SearchDocument>>> GetSearchResults(

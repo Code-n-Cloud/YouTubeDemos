@@ -6,30 +6,23 @@ using Azure.Search.Documents.Models;
 using Azure.Storage.Blobs;
 using Bogus;
 using ClassLibrary.Entities;
-using Microsoft.Extensions.Configuration;
-using OpenAI;
 using OpenAI.Embeddings;
 using System.Text.Json;
 
 namespace ClassLibrary.Services
 {
-    public class DocumentService
+    public class StorageAccountBlobService
     {
-        private string storageAccountConnectionString;
         private string searchEndPoint;
         private string searchKey;
         private readonly EmbeddingClient embeddingClient;
         private readonly SearchClient searchClient;
-        public DocumentService(IConfiguration configuration)
+        private readonly BlobContainerClient blobContainerClient;
+        public StorageAccountBlobService(EmbeddingClient embeddingClient, SearchClient searchClient, BlobContainerClient blobContainerClient)
         {
-            this.storageAccountConnectionString = configuration["AzureWebJobsStorage"];
-            var client = new OpenAIClient(new Azure.AzureKeyCredential(configuration["AZURE_OPEN_API_KEY"])
-                , new OpenAIClientOptions() { Endpoint = new Uri($"{configuration["AZURE_OPEN_API_ENDPOINT"]}/models") });
-            embeddingClient = client.GetEmbeddingClient("text-embedding-ada-002");
-            searchEndPoint = configuration["AZURE_SEARCH_ENDPOINT"];
-            searchKey = configuration["AZURE_SEARCH_KEY"];
-
-            searchClient = new SearchClient(new Uri(searchEndPoint), "insurance-documents-index", new AzureKeyCredential(searchKey));
+            this.embeddingClient = embeddingClient;
+            this.searchClient = searchClient;
+            this.blobContainerClient = blobContainerClient;
         }
         public List<AzureSearchDocument> GenerateHealthInsuranceDocuments(int documentCount)
         {
@@ -64,11 +57,10 @@ namespace ClassLibrary.Services
         }
         public async Task UplaodDocuments(List<AzureSearchDocument> documents)
         {
-            var containerClient = new BlobContainerClient(storageAccountConnectionString, "rag-documents");
             foreach (var doc in documents)
             {
                 doc.ContentVector = await GetEmbeddings(doc.Content);
-                var blobClient = containerClient.GetBlobClient($"{doc.Id}.json");
+                var blobClient = blobContainerClient.GetBlobClient($"{doc.Id}.json");
                 var jsonContent = System.Text.Json.JsonSerializer.Serialize(doc, new JsonSerializerOptions() { WriteIndented = true });
                 using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(jsonContent));
                 await blobClient.UploadAsync(stream, overwrite: true);

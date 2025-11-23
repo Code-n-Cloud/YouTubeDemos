@@ -1,0 +1,44 @@
+﻿@page
+@model WebApplication1.Pages.NewInsurancePolicyModel
+@{
+    <form method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label asp-for="InsurancePolicyModel.Content" class="form-label">Content *</label>
+            <input asp-for="InsurancePolicyModel.Content" class="form-control" required />
+            <span asp-validation-for="InsurancePolicyModel.Content" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="InsurancePolicyModel.Insurer" class="form-label">Insurer *</label>
+            <input asp-for="InsurancePolicyModel.Insurer" class="form-control" required />
+            <span asp-validation-for="InsurancePolicyModel.Insurer" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="InsurancePolicyModel.Title" class="form-label">Title *</label>
+            <input asp-for="InsurancePolicyModel.Title" class="form-control" required />
+            <span asp-validation-for="InsurancePolicyModel.Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="InsurancePolicyModel.Tags" class="form-label">Tags * (comma-separated)</label>
+            <input asp-for="InsurancePolicyModel.Tags" class="form-control" placeholder="tag1, tag2, tag3" required />
+            <span asp-validation-for="InsurancePolicyModel.Tags" class="text-danger"></span>
+            <div class="form-text">Enter tags separated by commas</div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="InsurancePolicyModel.PremiumAmount" class="form-label">Premium Amount *</label>
+            <input asp-for="InsurancePolicyModel.PremiumAmount" type="number" step="0.01" class="form-control" required />
+            <span asp-validation-for="InsurancePolicyModel.PremiumAmount" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input asp-for="InsurancePolicyModel.IsActive" class="form-check-input" />
+            <label asp-for="InsurancePolicyModel.IsActive" class="form-check-label">Active Policy</label>
+            <span asp-validation-for="InsurancePolicyModel.IsActive" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Policy</button>
+    </form>
+}

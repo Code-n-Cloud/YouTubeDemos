@@ -9,7 +9,7 @@ var builder = FunctionsApplication.CreateBuilder(args);
 builder.ConfigureFunctionsWebApplication();
 builder.Configuration.AddUserSecrets<Program>();
 
-builder.Services.AddSingleton<DocumentService>();
+builder.Services.AddSingleton<StorageAccountBlobService>();
 
 //builder.Services
 //    .AddApplicationInsightsTelemetryWorkerService()

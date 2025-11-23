@@ -7,7 +7,7 @@ using System.Text.Json.Nodes;
 
 namespace FunctionApp.Triggers;
 
-public class CustomerHistory(StorageAccountService storageAccountService, ILogger<CustomerHistory> logger)
+public class CustomerHistory(StorageAccountTableService storageAccountService, ILogger<CustomerHistory> logger)
 {
 
     [Function("CustomerHistory")]
