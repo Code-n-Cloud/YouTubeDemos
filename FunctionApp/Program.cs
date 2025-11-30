@@ -1,4 +1,7 @@
+using Azure.AI.Agents.Persistent;
+using ClassLibrary.Agents;
 using ClassLibrary.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +13,29 @@ builder.ConfigureFunctionsWebApplication();
 builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddSingleton<StorageAccountBlobService>();
+
+builder.Services.AddSingleton(serviceProvider =>
+{
+    string foundryEndpoint = GetConfigurationValue("AZURE_FOUNDRY_ENDPOINT");
+    return new PersistentAgentsClient(foundryEndpoint, new Azure.Identity.DefaultAzureCredential());
+});
+
+builder.Services.AddSingleton(serviceProvider =>
+{
+    string foundryEndpoint = GetConfigurationValue("AZURE_FOUNDRY_ENDPOINT");
+    string agentId = GetConfigurationValue("INSURANCE_CLAIM_AGENT_ID");
+    var client = serviceProvider.GetRequiredService<PersistentAgentsClient>();
+    return new InsuranceClaimAgent(client, agentId);
+});
+string GetConfigurationValue(string key)
+{
+    var configurationValue = builder.Configuration[key];
+    if (string.IsNullOrEmpty(configurationValue))
+    {
+        throw new InvalidOperationException($"Configuration value for '{key}' is missing.");
+    }
+    return configurationValue;
+}
 
 //builder.Services
 //    .AddApplicationInsightsTelemetryWorkerService()
