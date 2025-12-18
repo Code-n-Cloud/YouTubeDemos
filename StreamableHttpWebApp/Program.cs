@@ -31,12 +31,19 @@ namespace StreamableHttpWebApp
 
             builder.Services.AddSingleton<StorageAccountBlobService>();
             builder.Services.AddSingleton<UserManagementService>();
+            builder.Services.AddSingleton<TextToSpeechService>();
             //builder.Services.AddMcpServer().WithHttpTransport().WithTools<WeatherAlertsTool>();
             //builder.Services.AddHttpClient("WeatherApi", client =>
             //    {
             //        client.BaseAddress = new Uri("https://api.weather.gov/");
             //        client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("weather-tool", "1.0"));
             //    });
+            builder.Services.AddHttpClient("speechService", client =>
+            {
+                string speechServiceEndpoint = GetConfigurationValue(builder, "AZURE_AI_SERVICES_ENDPOINT");
+                client.BaseAddress = new Uri(speechServiceEndpoint);
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", GetConfigurationValue(builder, "AZURE_AI_SERVICES_KEY"));
+            });
 
             builder.Services.AddTransient(serviceProvider =>
             {

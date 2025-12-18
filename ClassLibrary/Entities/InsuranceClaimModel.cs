@@ -11,5 +11,6 @@ namespace ClassLibrary.Entities
         public string[] Tags { get; set; }
         public double PremiumAmount { get; set; }
         public bool IsActive { get; set; }
+        public string SpeechText { get; set; }
     }
 }

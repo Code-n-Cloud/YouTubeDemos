@@ -7,6 +7,11 @@
             <input asp-for="InsurancePolicyModel.Content" class="form-control" required />
             <span asp-validation-for="InsurancePolicyModel.Content" class="text-danger"></span>
         </div>
+        <div class="mb-3">
+            <label asp-for="InsurancePolicyModel.SpeechText" class="form-label">Speech text *</label>
+            <input asp-for="InsurancePolicyModel.SpeechText" class="form-control" required />
+            <span asp-validation-for="InsurancePolicyModel.SpeechText" class="text-danger"></span>
+        </div>
 
         <div class="mb-3">
             <label asp-for="InsurancePolicyModel.Insurer" class="form-label">Insurer *</label>
