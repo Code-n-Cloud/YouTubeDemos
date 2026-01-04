@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace StreamableHttpWebApp.Tools
 {
-    public class InsuranceClaimTools(StorageAccountBlobService storageAccountBlobService, ILogger<InsuranceClaimTools> logger)
+    public class InsurancePolicyTools(StorageAccountBlobService storageAccountBlobService, ILogger<InsurancePolicyTools> logger)
     {
         [McpServerTool, Description("Creates new insurance policy")]
         public async Task<string> CreateNewInsurancePolicy(
@@ -13,21 +13,25 @@ namespace StreamableHttpWebApp.Tools
             [Description("Title of the policy")] string title,
             [Description("Tags for the policy, comma seperated string")] string tags,
             [Description("PremiumAmount of the policy")] double premiumAmount,
-            [Description("IsActive, described if policy is active or not")] bool isActive)
+            [Description("IsActive, described if policy is active or not")] bool isActive,
+            [Description("Text of the speech video")] string speechText)
         {
             try
             {
+                string Id = Guid.NewGuid().ToString();
                 var document = new ClassLibrary.Entities.AzureSearchDocument
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = Id,
                     Content = content,
                     Insurer = insurer,
                     Title = title,
                     Tags = tags.Split(',').Select(t => t.Trim()).ToArray(),
                     PremiumAmount = premiumAmount,
-                    IsActive = isActive
+                    IsActive = isActive,
+                    SpeechText = speechText
                 };
                 await storageAccountBlobService.UplaodDocuments([document]);
+                await textToSpeechService.ProcessSpeechToText(Id, speechText);
                 return "Insurance policy created successfully with ID: " + document.Id;
             }
             catch (Exception ex)

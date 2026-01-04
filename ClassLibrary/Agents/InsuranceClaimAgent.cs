@@ -22,6 +22,7 @@ namespace ClassLibrary.Agents
                 tags: {insuranceClaimModel.Tags.FirstOrDefault()}
                 premiumAmount: {insuranceClaimModel.PremiumAmount}
                 isActive: {insuranceClaimModel.IsActive}
+                speechText: {insuranceClaimModel.SpeechText}
                 """;
             string agentResponse = await new BaseAgent(persistentAgentsClient).CallFoundryAgent(prompt, agentId);
             return agentResponse;

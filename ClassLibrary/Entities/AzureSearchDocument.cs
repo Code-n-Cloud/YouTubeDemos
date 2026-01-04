@@ -22,5 +22,7 @@ namespace ClassLibrary.Entities
         [SimpleField(IsFilterable = false, IsSortable = false, IsFacetable = false)]
         [VectorSearchField(VectorSearchDimensions = 1536, VectorSearchProfileName = "vector-profile")]
         public float[] ContentVector { get; set; }
+        [SimpleField]
+        public string SpeechText { get; set; }
     }
 }

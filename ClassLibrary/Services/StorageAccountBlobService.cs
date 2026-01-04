@@ -4,6 +4,7 @@ using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Indexes.Models;
 using Azure.Search.Documents.Models;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Bogus;
 using ClassLibrary.Entities;
 using OpenAI.Embeddings;
@@ -65,6 +66,24 @@ namespace ClassLibrary.Services
                 using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(jsonContent));
                 await blobClient.UploadAsync(stream, overwrite: true);
             }
+        }
+        public async Task UplaodVideo(string videoId, Stream stream)
+        {
+            var blobClient = blobContainerClient.GetBlobClient($"{videoId}.mp4");
+            BlobUploadOptions blobUploadOptions = new BlobUploadOptions()
+            {
+                HttpHeaders = new BlobHttpHeaders()
+                {
+                    ContentType = "video/mp4"
+                },
+                TransferOptions = new Azure.Storage.StorageTransferOptions()
+                {
+                    InitialTransferSize = 4 * 1024 * 1024,
+                    MaximumTransferSize = 4 * 1024 * 1024,
+                    MaximumConcurrency = 4
+                }
+            };
+            await blobClient.UploadAsync(stream, blobUploadOptions);
         }
         public async Task CreateOrUpdateIndex()
         {

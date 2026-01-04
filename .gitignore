@@ -16,3 +16,6 @@
 /StreamableHttpWebApp/Properties/PublishProfiles/YouTubeDemosWebApp - Web Deploy.pubxml.user
 /StreamableHttpWebApp/StreamableHttpWebApp.csproj.user
 /FunctionApp/Properties/ServiceDependencies/fa-youtubedemos - Zip Deploy/profile.arm.json
+/SessionBasedFiltering/bin/Debug/net9.0
+/SessionBasedFiltering/obj
+/SessionBasedFiltering/SessionBasedFiltering.csproj.user
