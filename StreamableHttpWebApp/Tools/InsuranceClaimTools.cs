@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace StreamableHttpWebApp.Tools
 {
-    public class InsurancePolicyTools(StorageAccountBlobService storageAccountBlobService, ILogger<InsurancePolicyTools> logger)
+    public class InsuranceClaimTools(StorageAccountBlobService storageAccountBlobService, ILogger<InsuranceClaimTools> logger)
     {
         [McpServerTool, Description("Creates new insurance policy")]
         public async Task<string> CreateNewInsurancePolicy(
