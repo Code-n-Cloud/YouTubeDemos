@@ -4,14 +4,14 @@ using System.ComponentModel;
 
 namespace StreamableHttpWebApp.Tools
 {
-    public class InsurancePolicyTools(StorageAccountBlobService storageAccountBlobService, ILogger<InsurancePolicyTools> logger)
+    public class InsuranceClaimTools(StorageAccountBlobService storageAccountBlobService, ILogger<InsuranceClaimTools> logger, TextToSpeechService textToSpeechService)
     {
         [McpServerTool, Description("Creates new insurance policy")]
         public async Task<string> CreateNewInsurancePolicy(
             [Description("Content of the policy")] string content,
             [Description("Insurer of the policy")] string insurer,
             [Description("Title of the policy")] string title,
-            [Description("Tags for the policy, comma seperated string")] string tags,
+            [Description("Tags for the policy, comma separated string")] string tags,
             [Description("PremiumAmount of the policy")] double premiumAmount,
             [Description("IsActive, described if policy is active or not")] bool isActive,
             [Description("Text of the speech video")] string speechText)

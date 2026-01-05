@@ -2,7 +2,7 @@
     "IsEncrypted": false,
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "AZURE_OPEN_API_ENDPOINT": "https://ai-youtubedemosmanualhub966219160612.openai.azure.com",
+    "AZURE_OPEN_AI_ENDPOINT": "https://youtube-demo-project-resource.openai.azure.com",
     "AZURE_SEARCH_ENDPOINT": "https://youtube-azure-ai-search.search.windows.net",
     "AZURE_FOUNDRY_ENDPOINT": "https://youtube-demo-project-resource.services.ai.azure.com/api/projects/youtube-demo-project",
     "INSURANCE_CLAIM_AGENT_ID": "asst_9p3MlUUBwT9EchnNo9MpNHJl"
